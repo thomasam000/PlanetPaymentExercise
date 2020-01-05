@@ -6,7 +6,7 @@
 package com.sdk.planetpaymentexercise.ServiceLayer;
 
 import com.sdk.planetpaymentexercise.DataAccessObject.EmployeeDAO;
-import com.sdk.planetpaymentexercise.DataAccessObject.EmployeeDAOImpl;
+import com.sdk.planetpaymentexercise.DataAccessObject.EmployeeDAOInput2Impl;
 import com.sdk.planetpaymentexercise.DataAccessObject.FilePersistenceException;
 import com.sdk.planetpaymentexercise.DataTransferObject.Employee;
 import java.util.List;
@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 public class EmployeeServiceImplTest {
 
     List<Employee> employees;
-    EmployeeDAO dao = new EmployeeDAOImpl("TestInputFile.txt", "TestOutputFile.txt");
+    EmployeeDAO dao = new EmployeeDAOInput2Impl("TestInputFile.txt", "TestOutputFile.txt");
     EmployeeService service = new EmployeeServiceImpl(dao);
 
     public EmployeeServiceImplTest() {

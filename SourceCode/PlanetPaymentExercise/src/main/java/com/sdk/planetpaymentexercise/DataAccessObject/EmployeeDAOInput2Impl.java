@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class EmployeeDAOImpl implements EmployeeDAO {
+public class EmployeeDAOInput2Impl implements EmployeeDAO {
 
     private String DELIMITER = ",";
     private List<Employee> employees = new ArrayList<>();
@@ -25,7 +25,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     private String inputFile;
     private String outputFile;
 
-    public EmployeeDAOImpl(String inputFile, String outputFile) {
+    public EmployeeDAOInput2Impl(String inputFile, String outputFile) {
         this.inputFile = inputFile;
         this.outputFile = outputFile;
     }
@@ -61,16 +61,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         String fileFormat = scanner.nextLine();
         while (scanner.hasNextLine()) {
             String currentLine = scanner.nextLine();
-            switch (fileFormat) {
-                case "1":
-                    Employee currentEmployeeFixed = parseDataIntoEmployeeFixed(currentLine);
-                    employees.add(currentEmployeeFixed);
-                    break;
-                case "2":
-                    Employee currentEmployee = parseDataIntoEmployee(currentLine);
-                    employees.add(currentEmployee);
-                    break;
-            }
+            Employee currentEmployee = parseDataIntoEmployee(currentLine);
+            employees.add(currentEmployee);
         }
         scanner.close();
     }
@@ -92,7 +84,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             out.println(emp.getAddress1() + ", " + emp.getAddress2());
             out.println(emp.getCity() + ", " + emp.getState());
             out.println(emp.getCountry() + ", " + emp.getZipCode());
-            out.println("");
             out.flush();
         }
         out.close();
@@ -106,31 +97,24 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         emp.setLastName(brokenLine[1]);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         try {
-         emp.setDate(LocalDate.parse(brokenLine[2], formatter));
+            emp.setDate(LocalDate.parse(brokenLine[2], formatter));
         } catch (DateTimeParseException ex) {
-        emp.setDate(null);
+            emp.setDate(null);
         }
         emp.setAddress1(brokenLine[3]);
         emp.setAddress2(brokenLine[4]);
         emp.setCity(brokenLine[5]);
-        emp.setState(brokenLine[6]);
-        emp.setCountry(brokenLine[7]);
+        if (!brokenLine[6].equals("")) {
+            emp.setState(brokenLine[6]);
+        } else {
+            emp.setState("CA");
+        }
+        if (!brokenLine[7].equals("")) {
+            emp.setCountry(brokenLine[7]);
+        } else {
+            emp.setCountry("USA");
+        }
         emp.setZipCode(brokenLine[8]);
-        return emp;
-    }
-
-    private Employee parseDataIntoEmployeeFixed(String currentLine) {
-        Employee emp = new Employee();
-        emp.setFirstName(currentLine.substring(0,10).trim());
-        emp.setLastName(currentLine.substring(10,27).trim());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        emp.setDate(LocalDate.parse(currentLine.substring(27,35), formatter));
-        emp.setAddress1(currentLine.substring(35,45).trim());
-        emp.setAddress2(currentLine.substring(45,55).trim());
-        emp.setCity(currentLine.substring(55,65).trim());
-        emp.setState(currentLine.substring(65,67).trim());
-        emp.setCountry(currentLine.substring(67,70).trim());
-        emp.setZipCode(currentLine.substring(70,80).trim());
         return emp;
     }
 

@@ -7,7 +7,8 @@ package com.sdk.planetpaymentexercise;
 
 import com.sdk.planetpaymentexercise.Controllers.PlanetPaymentController;
 import com.sdk.planetpaymentexercise.DataAccessObject.EmployeeDAO;
-import com.sdk.planetpaymentexercise.DataAccessObject.EmployeeDAOImpl;
+import com.sdk.planetpaymentexercise.DataAccessObject.EmployeeDAOInput1Impl;
+import com.sdk.planetpaymentexercise.DataAccessObject.EmployeeDAOInput2Impl;
 import com.sdk.planetpaymentexercise.ServiceLayer.EmployeeService;
 import com.sdk.planetpaymentexercise.ServiceLayer.EmployeeServiceImpl;
 import com.sdk.planetpaymentexercise.UI.View;
@@ -24,9 +25,7 @@ public class App {
     //keeping it loosely coupled
     
     View view = new View();
-    EmployeeDAO dao = new EmployeeDAOImpl("FixedInputFile.txt", "OutputFile.txt");
-    EmployeeService service = new EmployeeServiceImpl(dao);
-    PlanetPaymentController controller = new PlanetPaymentController(view,service);
+    PlanetPaymentController controller = new PlanetPaymentController(view);
     
     controller.run();
     

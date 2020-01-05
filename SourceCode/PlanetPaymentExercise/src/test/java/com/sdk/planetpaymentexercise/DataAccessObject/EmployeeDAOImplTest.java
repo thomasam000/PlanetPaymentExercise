@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
  */
 public class EmployeeDAOImplTest {
 
-    EmployeeDAO dao = new EmployeeDAOImpl("TestInputFile.txt", "TestOutputFile.txt");
+    EmployeeDAO dao = new EmployeeDAOInput2Impl("TestInputFile.txt", "TestOutputFile.txt");
     
     public EmployeeDAOImplTest() {
         

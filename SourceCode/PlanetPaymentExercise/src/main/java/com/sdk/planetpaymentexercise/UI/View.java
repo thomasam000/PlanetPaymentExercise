@@ -63,4 +63,8 @@ public class View {
             display("");
         }
     }
+
+    public int fileInputSelection() {
+        return promptInt("1. File Format 1 \n2. File Format 2", 1, 2);
+    }
 }
