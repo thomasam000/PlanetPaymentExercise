@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -93,7 +94,11 @@ public class EmployeeDAOInput1Impl implements EmployeeDAO {
         emp.setFirstName(currentLine.substring(0, 10).trim());
         emp.setLastName(currentLine.substring(10, 27).trim());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        emp.setDate(LocalDate.parse(currentLine.substring(27, 35), formatter));
+        try {
+            emp.setDate(LocalDate.parse(currentLine.substring(27, 35), formatter));
+        } catch (DateTimeParseException ex) {
+            emp.setDate(null);
+        }
         emp.setAddress1(currentLine.substring(35, 45).trim());
         emp.setAddress2(currentLine.substring(45, 55).trim());
         emp.setCity(currentLine.substring(55, 65).trim());
