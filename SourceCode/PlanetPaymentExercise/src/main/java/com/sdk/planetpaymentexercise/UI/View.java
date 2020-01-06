@@ -44,7 +44,7 @@ public class View {
                 if (answer <= max && answer >= min) {
                 valid = true;
                 } else {
-                display("ENTER A NUMBER BETWEEN 1 AND 3");
+                display("ENTER A NUMBER BETWEEN " + min + " AND " + max );
                 }
             } catch (NumberFormatException e) {
                 display("NOT A NUMBER");

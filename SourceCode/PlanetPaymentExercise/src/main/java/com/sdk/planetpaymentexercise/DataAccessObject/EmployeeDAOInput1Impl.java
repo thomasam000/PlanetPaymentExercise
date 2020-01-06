@@ -71,15 +71,10 @@ public class EmployeeDAOInput1Impl implements EmployeeDAO {
     private void load() throws FilePersistenceException {
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream(inputFile);
         if (stream == null) {
-            throw new FilePersistenceException("1stERROR");
+            throw new FilePersistenceException("File Not Found");
         }
-        Scanner scanner = null;
+        Scanner scanner = new Scanner(stream);
 
-        try {
-            scanner = new Scanner(stream);
-        } catch (Exception e) {
-            throw new FilePersistenceException("2ndERROR", e);
-        }
         String fileFormat = scanner.nextLine();
         while (scanner.hasNextLine()) {
             String currentLine = scanner.nextLine();
@@ -89,11 +84,15 @@ public class EmployeeDAOInput1Impl implements EmployeeDAO {
         scanner.close();
     }
 
-    private Employee parseDataIntoEmployeeFixed(String currentLine) {
+    //to parse the data with white space I broke the string into substrings and trimmed off the extra white space at the end
+    private Employee parseDataIntoEmployeeFixed(String currentLine) throws FilePersistenceException {
         Employee emp = new Employee();
+        try {
         emp.setFirstName(currentLine.substring(0, 10).trim());
         emp.setLastName(currentLine.substring(10, 27).trim());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        //defensive programming
+        //preventing possible exception when parsing date 
         try {
             emp.setDate(LocalDate.parse(currentLine.substring(27, 35), formatter));
         } catch (DateTimeParseException ex) {
@@ -113,6 +112,9 @@ public class EmployeeDAOInput1Impl implements EmployeeDAO {
             emp.setCountry("USA");
         }
         emp.setZipCode(currentLine.substring(70, 80).trim());
+        } catch (IndexOutOfBoundsException ex) {
+            throw new FilePersistenceException("Invalid Record Found");
+        }
         return emp;
     }
 

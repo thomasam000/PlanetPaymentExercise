@@ -9,7 +9,6 @@ import com.sdk.planetpaymentexercise.DataAccessObject.EmployeeDAO;
 import com.sdk.planetpaymentexercise.DataAccessObject.FilePersistenceException;
 import com.sdk.planetpaymentexercise.DataTransferObject.Employee;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService {
@@ -46,7 +45,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return dao.saveEmployeesToFile(sortedEmployees);
     }
 
-    
+    //uses collection.sort which uses the timsort algorithm
+    //time complexity O(n*log(n))
     //sorting by first name
     private List<Employee> sortAlgorithmFirstName(List<Employee> employees) {
         Collections.sort(employees, (final Employee object1, final Employee object2) -> object1.getFirstName().compareTo(object2.getFirstName()));

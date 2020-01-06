@@ -51,13 +51,8 @@ public class EmployeeDAOInput2Impl implements EmployeeDAO {
         if (stream == null) {
             throw new FilePersistenceException("1stERROR");
         }
-        Scanner scanner = null;
+        Scanner scanner = new Scanner(stream);
 
-        try {
-            scanner = new Scanner(stream);
-        } catch (Exception e) {
-            throw new FilePersistenceException("2ndERROR", e);
-        }
         String fileFormat = scanner.nextLine();
         while (scanner.hasNextLine()) {
             String currentLine = scanner.nextLine();

@@ -25,7 +25,7 @@ public class App {
 
         //the controller gains access to the view via constructor injection
         View view = new View();
-        //
+        //these are the two different implementations of the data access layer interface
         EmployeeDAO dao1 = new EmployeeDAOInput1Impl("FixedInputFile.txt", "OutputFile.txt");
         EmployeeDAO dao2 = new EmployeeDAOInput2Impl("InputFile.txt", "OutputFile.txt");
         EmployeeService service = null;

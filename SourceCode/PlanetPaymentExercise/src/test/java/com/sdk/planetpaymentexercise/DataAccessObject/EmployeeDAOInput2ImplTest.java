@@ -63,6 +63,7 @@ public class EmployeeDAOInput2ImplTest {
         employee.setCountry("USA");
         employee.setZipCode("49567");
         
+        //test to see if the employee is succesfully read from the file
         assertTrue(employee.equals(resultList.get(0)));
     }
 
@@ -71,8 +72,12 @@ public class EmployeeDAOInput2ImplTest {
         boolean expResult = true;
         List<Employee> resultList = dao.readEmployeesFromFile();
         boolean result = dao.saveEmployeesToFile(resultList);
-        
+        List<Employee> resultListAfterWriting = dao.readEmployeesFromFile();
+
+        //test if the write method returns true, meaning no errors were encountered
         assertEquals(expResult, result);
+        //checks to see if the same list is retrieved after writing that list to the file
+        assertEquals(resultList, resultListAfterWriting);
         
     }
 }

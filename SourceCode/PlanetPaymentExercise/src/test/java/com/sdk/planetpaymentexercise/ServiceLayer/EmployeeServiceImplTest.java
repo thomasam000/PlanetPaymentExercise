@@ -47,6 +47,7 @@ public class EmployeeServiceImplTest {
     public void tearDown() {
     }
 
+    //test to see if the sort methods will sort a list correctly 
     @Test
     public void testSortFirstName() {
         List<Employee> sorted = service.sort(employees, 1);
@@ -78,7 +79,6 @@ public class EmployeeServiceImplTest {
         assertEquals(exp1, sorted.get(0).getFirstName());
         assertEquals(exp2, sorted.get(1).getFirstName());
         assertEquals(exp3, sorted.get(2).getFirstName());
-
     }
 
 }

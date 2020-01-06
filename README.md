@@ -10,3 +10,5 @@ It is a basic console application just follow the instructions
 4. will create an output file in the current directory that the jar file is located in containing the sorted employee list in the output format
 
 Elegí hacer el ejercicio de la manera más simple, sin Spring y sin ninguna otra Java library, para mostrar primeramente mi entendimiento de los principios de OOP, dependency injection, y del modelo de MVC.
+
+complete with JUnit testing, Exception preventative programming and comments that outline what the code is doing and when the program is demonstrating OOP principles
