@@ -6,9 +6,12 @@
 package com.sdk.planetpaymentexercise.DataAccessObject;
 
 /**
- *
  * @author samuelthomas
  */
+//INHERITANCE
+//this classs inherits capabilities from the parent class Exception through inheritance
+//custom exception class that I can through and catch whenever I encounter problems with file persistence
+
 public class FilePersistenceException extends Exception {
 
     public FilePersistenceException(String message) {
@@ -18,5 +21,4 @@ public class FilePersistenceException extends Exception {
     public FilePersistenceException(String message, Throwable cause) {
         super(message, cause);
     }
-    
 }

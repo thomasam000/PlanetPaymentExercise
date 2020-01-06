@@ -46,16 +46,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         return dao.saveEmployeesToFile(sortedEmployees);
     }
 
+    
+    //sorting by first name
     private List<Employee> sortAlgorithmFirstName(List<Employee> employees) {
         Collections.sort(employees, (final Employee object1, final Employee object2) -> object1.getFirstName().compareTo(object2.getFirstName()));
         return employees;
     }
-
+    //sorting by last name
     private List<Employee> sortAlgorithmLastName(List<Employee> employees) {
         Collections.sort(employees, (final Employee object1, final Employee object2) -> object1.getLastName().compareTo(object2.getLastName()));
         return employees;
     }
-
+    //sorting by date
     private List<Employee> sortAlgorithmDate(List<Employee> employees) {
         Collections.sort(employees, (final Employee object1, final Employee object2) -> object1.getDate().compareTo(object2.getDate()));
         return employees;

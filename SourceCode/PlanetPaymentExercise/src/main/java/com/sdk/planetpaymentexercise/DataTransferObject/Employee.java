@@ -13,6 +13,9 @@ import java.util.Objects;
  * @author samuelthomas
  */
 
+
+//ENCAPSULATION
+//you can only access and change the properties through the following getter and setter methods
 public class Employee {
     private String firstName;
     private String lastName;
@@ -110,7 +113,7 @@ public class Employee {
         hash = 83 * hash + Objects.hashCode(this.country);
         return hash;
     }
-
+//used for testing
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

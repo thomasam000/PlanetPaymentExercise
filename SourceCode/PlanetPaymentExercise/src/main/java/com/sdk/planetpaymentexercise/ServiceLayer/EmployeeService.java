@@ -13,6 +13,12 @@ import java.util.List;
  *
  * @author samuelthomas
  */
+//ABSTRACTION
+//the controller has access to the service layer
+//the controller is unaware of how the service layer sorts the employees
+//but it knows the method signature through the interface 
+// - a list of employees and an integer are required as parameters
+// - returns a list of employees
 public interface EmployeeService {
     
     List<Employee> readAllEmployees() throws FilePersistenceException;

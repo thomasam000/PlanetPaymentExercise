@@ -21,11 +21,11 @@ import static org.junit.Assert.*;
  *
  * @author samuelthomas
  */
-public class EmployeeDAOImplTest {
+public class EmployeeDAOInput2ImplTest {
 
     EmployeeDAO dao = new EmployeeDAOInput2Impl("TestInputFile.txt", "TestOutputFile.txt");
     
-    public EmployeeDAOImplTest() {
+    public EmployeeDAOInput2ImplTest() {
         
     }
 
