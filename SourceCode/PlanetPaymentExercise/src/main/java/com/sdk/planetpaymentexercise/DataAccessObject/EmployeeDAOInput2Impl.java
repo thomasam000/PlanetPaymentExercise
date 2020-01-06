@@ -99,6 +99,7 @@ public class EmployeeDAOInput2Impl implements EmployeeDAO {
         emp.setAddress1(brokenLine[3]);
         emp.setAddress2(brokenLine[4]);
         emp.setCity(brokenLine[5]);
+        //state and country have default values if it was left blank
         if (!brokenLine[6].equals("")) {
             emp.setState(brokenLine[6]);
         } else {
