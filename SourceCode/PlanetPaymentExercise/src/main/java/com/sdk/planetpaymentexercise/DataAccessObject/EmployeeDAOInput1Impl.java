@@ -79,7 +79,9 @@ public class EmployeeDAOInput1Impl implements EmployeeDAO {
         while (scanner.hasNextLine()) {
             String currentLine = scanner.nextLine();
             Employee currentEmployeeFixed = parseDataIntoEmployeeFixed(currentLine);
-            employees.add(currentEmployeeFixed);
+            if (currentEmployeeFixed != null) {
+                employees.add(currentEmployeeFixed);
+            }
         }
         scanner.close();
     }
@@ -88,32 +90,37 @@ public class EmployeeDAOInput1Impl implements EmployeeDAO {
     private Employee parseDataIntoEmployeeFixed(String currentLine) throws FilePersistenceException {
         Employee emp = new Employee();
         try {
-        emp.setFirstName(currentLine.substring(0, 10).trim());
-        emp.setLastName(currentLine.substring(10, 27).trim());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        //defensive programming
-        //preventing possible exception when parsing date 
-        try {
-            emp.setDate(LocalDate.parse(currentLine.substring(27, 35), formatter));
-        } catch (DateTimeParseException ex) {
-            emp.setDate(null);
-        }
-        emp.setAddress1(currentLine.substring(35, 45).trim());
-        emp.setAddress2(currentLine.substring(45, 55).trim());
-        emp.setCity(currentLine.substring(55, 65).trim());
-        if (!currentLine.substring(65, 67).trim().equals("")) {
-            emp.setState(currentLine.substring(65, 67).trim());
-        } else {
-            emp.setState("CA");
-        }
-        if (!currentLine.substring(67, 70).trim().equals("")) {
-            emp.setCountry(currentLine.substring(67, 70).trim());
-        } else {
-            emp.setCountry("USA");
-        }
-        emp.setZipCode(currentLine.substring(70, 80).trim());
+            emp.setFirstName(currentLine.substring(0, 10).trim());
+            emp.setLastName(currentLine.substring(10, 27).trim());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+            //defensive programming
+            //preventing possible exception when parsing date 
+            try {
+                emp.setDate(LocalDate.parse(currentLine.substring(27, 35), formatter));
+            } catch (DateTimeParseException ex) {
+                emp.setDate(null);
+            }
+        //if employee record does not contain first name last name or date the record is invalid
+            if (emp.getFirstName().equals("") || emp.getLastName().equals("") || emp.getDate() == null) {
+                return null;
+            }
+            emp.setAddress1(currentLine.substring(35, 45).trim());
+            emp.setAddress2(currentLine.substring(45, 55).trim());
+            emp.setCity(currentLine.substring(55, 65).trim());
+            //state and country have default values if it was left blank
+            if (!currentLine.substring(65, 67).trim().equals("")) {
+                emp.setState(currentLine.substring(65, 67).trim());
+            } else {
+                emp.setState("CA");
+            }
+            if (!currentLine.substring(67, 70).trim().equals("")) {
+                emp.setCountry(currentLine.substring(67, 70).trim());
+            } else {
+                emp.setCountry("USA");
+            }
+            emp.setZipCode(currentLine.substring(70, 80).trim());
         } catch (IndexOutOfBoundsException ex) {
-            throw new FilePersistenceException("Invalid Record Found");
+            return null;
         }
         return emp;
     }

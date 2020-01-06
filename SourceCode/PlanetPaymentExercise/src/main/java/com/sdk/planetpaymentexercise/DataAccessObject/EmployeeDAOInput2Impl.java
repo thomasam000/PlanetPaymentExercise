@@ -96,6 +96,10 @@ public class EmployeeDAOInput2Impl implements EmployeeDAO {
         } catch (DateTimeParseException ex) {
             emp.setDate(null);
         }
+        //if employee record does not contain first name last name or date the record is invalid
+        if (emp.getFirstName().equals("") || emp.getLastName().equals("") || emp.getDate() == null) {
+            return null;
+        }
         emp.setAddress1(brokenLine[3]);
         emp.setAddress2(brokenLine[4]);
         emp.setCity(brokenLine[5]);
